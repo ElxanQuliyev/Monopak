@@ -1,0 +1,27 @@
+﻿@model MonopakApp.ViewModels.HomeVm
+@using MonopakApp.Models
+@foreach (var pro in Model.ProductList)
+{
+    <div class="col-lg-6 col-sm-6 my-4">
+        <div class="product-item">
+            <div class="row">
+                <div class="col-lg-7">
+                    <div class="product-text p-3">
+                        @Html.Raw(pro.Description)
+                        <hr />
+                        <h4>@pro.Name</h4>
+
+                    </div>
+                </div>
+                <div class="col-lg-5">
+                    <div class="product-img">
+                        <img src="@pro.ProductPhoto" class="img-fluid" alt="">
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+

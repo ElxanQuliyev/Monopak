@@ -1,0 +1,110 @@
+﻿@model MonopakApp.ViewModels.HomeVm
+@using MonopakApp.Models
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Monopak</title>
+    <link href="~/FrontPublic/css/style.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/FrontPublic/fonts/fontawesome/css/all.min.css" rel="stylesheet" />
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+
+    <!-- Header  -->
+    <header>
+        <!--Navbar -->
+        <nav class="mb-1 navbar navbar-expand-lg navbar-light bg-light">
+            <div class="col-lg-2 col-sm-4 col-4">
+                <a class="navbar-brand" href="/"><img class="img-fluid" src="~/FrontPublic/Uploads/monopak_logo.png" alt=""></a>
+            </div>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-333" aria-controls="navbarSupportedContent-333" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-between" id="navbarSupportedContent-333">
+                <ul class="navbar-nav ml-5">
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#AboutUs">Haqqımızda</a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-333" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Məhsullar
+                        </a>
+                        <div class="dropdown-menu dropdown-default" aria-labelledby="navbarDropdownMenuLink-333">
+                            @foreach (var cat in Model.categoryList)
+                            {
+                                <a class="dropdown-item" href="@Url.Action("ProductList","Home",new { id=cat.Id})">@cat.Name</a>
+
+                            }
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="@Url.Action("Contact","Home")">Bizimlə Əlaqə</a>
+                    </li>
+                    <li class="nav-item  ml-5">
+                        <a href="#" class="nav-link waves-effect waves-light">
+                            📧 info@monopak.az
+                        </a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav ml-auto nav-flex-icons">
+                    
+                    <li class="nav-item">
+                        <a class="nav-link waves-effect waves-light">
+                            <span>📞 051 9909899</span><br />
+                        </a>
+                        <a class="nav-link waves-effect waves-light">
+
+                            <span>📞 051 2507396</span><br />
+                        </a>
+
+                    </li>
+                    
+                </ul>
+            </div>
+        </nav>
+        <!--/.Navbar -->
+    </header>
+    <!--/ Header  -->
+    @RenderBody()
+
+
+    <!-- Footer  -->
+    <footer id="footer " class="bg-dark p-2">
+        <div class="container-fluid">
+            <div class="row align-items-center justify-content-between">
+                <div class="col-lg-2 col-4">
+                    <div class="footer-logo">
+                        <img src="~/Frontpublic/uploads/monopak_logo.png" class="img-fluid" alt="">
+                    </div>
+                </div>
+                <div class="col-lg-3 col-4">
+                    <div class="social-ico text-center">
+                        <a href="#" class="mr-3">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-3 text-white text--sm-right mt-3 mt-sm-0">
+                    &copy; Monopak bütün hüquqlar qorunur.
+                </div>
+            </div>
+        </div>
+
+    </footer>
+    <!--/ Footer  -->
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    <script src="~/FrontPublic/js/app.js"></script>
+    @RenderSection("scripts", required: false)
+
+</body>
+</html>

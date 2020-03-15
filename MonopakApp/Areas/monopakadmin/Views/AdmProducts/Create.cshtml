@@ -1,0 +1,84 @@
+﻿@model MonopakApp.Models.Product
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Areas/monopakadmin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm("Create", "AdmProducts", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    <h4>Product</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.CategoryId, "CategoryId", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("CategoryId", null, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.CategoryId, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.Label("Yeni Şəkil", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <input type="file" id="ProductPhoto" name="ProductPhoto" class="form-control d-none" value="şəkil seçin" />
+            <label style="padding:12px 25px;background:#042d6c;color:#fff;cursor:pointer" for="ProductPhoto">Şəkil seçmək</label>
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <textarea id="proId" class="form-control"></textarea>
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Yarat" class="btn btn-success" />
+        </div>
+    </div>
+</div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+@section adminCss{
+        
+    <script src="~/Scripts/tinymce/tinymce.min.js"></script>
+    <script>
+        tinymce.init({
+            selector: '#proId',
+            //init_instance_callback: "insert_contents",
+             height : "300"
+        })
+
+        //function insert_contents(inst) {
+        //    inst.setContent(`
+        //            <dl class="dl-horizontal maindl" style="">
+        //                <dt class="col-sm-3 mb-2"><b>Material :</b> </dt>
+                        
+        //                <dt class="col-sm-3 mb-2"><b>Ölçü :</b></dt>
+                        
+        //                <dt class="col-sm-3 mb-2"><b>Tərkibi :</b></dt>
+        //            </dl>
+        //    `);  
+        //}
+    </script>
+}

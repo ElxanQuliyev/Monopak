@@ -1,0 +1,142 @@
+﻿@model MonopakApp.ViewModels.HomeVm
+@using MonopakApp.Models
+@{
+    ViewBag.Title = "Ana Səhifə";
+}
+
+<!-- Slider -->
+<section id="Slider" class="d-flex align-items-center">
+    <div class="container">
+        <div class="slide-middle">
+            @{
+                int slide = 0;
+            }
+
+            @foreach (TopSlider sld in Model.TopSlider)
+            {
+                <div class="slider-item @(slide==0 ? "slide-active" : "") ">
+
+                    <div class="row justify-content-end">
+                        <div class="col-lg-8 col-sm-10">
+                            <div class="slide-img" style="background:url(@sld.SliderPhoto) no-repeat center center/ contain">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slide-content ml-5">
+                        <h2>@sld.Description</h2>
+                        @if (sld.Price != null)
+                        {
+                            <h5>@sld.Price Azn</h5>
+
+                        }
+                    </div>
+                </div>
+                slide++;
+            }
+
+            <div class="btn btn-white btnMain">
+                <i class="fas fa-chevron-down fa-3x"></i>
+            </div>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+<!--/ Slider -->
+<!-- About Us -->
+<section id="AboutUs" class="my-5 py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-sm-6 mb-4">
+                <div class="about-left">
+                    <h2>Biz kimik?</h2>
+                    <h5><i>@Model.about.Header</i></h5>
+                    <p class="my-4">@Model.about.Description</p>
+                    @*<a class="btn btn-outline-dark" href="#">Ətraflı</a>*@
+                </div>
+            </div>
+            <div class="col-lg-6 col-sm-6">
+                <div class="about-right">
+                    <img class="img-thumbnail" src="@Model.about.AboutPhoto" alt="">
+                </div>
+            </div>
+        </div>
+        <hr>
+    </div>
+</section>
+
+<!-- /About Us -->
+<!-- Category -->
+<section id="Category">
+    <div class="container-fluid">
+        <div class="category-header">
+            <h1 class="text-center my-5 hdmain">Kateqoriyalar </h1>
+        </div>
+        @{ 
+            int catcount = 0;
+        }
+        @foreach (var cat in Model.categoryList)
+        {
+            <div class="category-item">
+                <div class="row no-gutters">
+                    <div class="col-lg-6 col-md-6  order-lg-3 order-md-3">
+                        <img class="img-fluid" src="@cat.CategoryPhoto" alt="">
+                    </div>
+                    <div class="col-12 col-md-6 @(catcount % 2 != 0 ? "order-lg-4 order-md-4":"") bg-light px-3 py-5 p-md-5">
+                        <div class="category-right">
+                            <h3>
+                                @cat.Name
+                            </h3>
+                            <p class="my-5">@cat.Description</p>
+                            <a class="btn btn-outline-success" href="@Url.Action("ProductList","Home",new { id=cat.Id})">Məhsullar</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            catcount++;
+        }
+    </div>
+</section>
+<!-- /Category -->
+<section id="Products">
+    <div class="container-fluid">
+        <div class="product-header">
+            <h1 class="hdmain text-center my-5">Məhsullar</h1>
+        </div>
+        <div class="row">
+            @foreach (var pro in Model.ProductList)
+            {
+                <div class="col-lg-6 col-sm-6 my-4">
+                    <div class="product-item">
+                        <div class="row">
+                            <div class="col-lg-7">
+                                <div class="product-text p-3">
+                                    @Html.Raw(pro.Description)
+                                    <hr />
+                                    <h4>@pro.Name</h4>
+
+                                </div>
+                            </div>
+                            <div class="col-lg-5">
+                                <div class="product-img">
+                                    <img src="@pro.ProductPhoto" class="img-fluid" alt="">
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+        <div class="d-flex justify-content-center my-3">
+            <a class="btn btn-outline-success btn-lg text-center" href="@Url.Action("ProductList","Home")">Daha çox məhsul</a>
+        </div>
+    </div>
+</section>
+
+@section scripts{
+    <script src="~/FrontPublic/js/slider.js"></script>
+}
