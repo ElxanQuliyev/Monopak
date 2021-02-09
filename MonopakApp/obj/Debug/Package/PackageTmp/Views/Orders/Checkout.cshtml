@@ -1,0 +1,187 @@
+﻿@model MonopakApp.ViewModels.CheckoutViewModel
+@{
+    ViewBag.Title = "Checkout";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="spad" style="margin:8em 0">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 offset-lg-1">
+                <div class="page-content-holder">
+                    <div class="page-content-header">
+                        <h2>Sifariş</h2>
+                    </div>
+
+                    @if (Model.CartItems != null && Model.CartItems.Count > 0)
+                    {
+<div id="checkout-holder">
+<section class="">
+<div class="row checkout-form">
+<div class="col-lg-8">
+<div class="contact-container">
+
+<h4>Əlaqə məlumatları</h4>
+
+<form id="contactDetailsForm">
+<div id="loadFormGif">
+    <img width="200" src="~/FrontPublic/Uploads/_______.gif" alt="Alternate Text" />
+</div>
+<div class="form-row mb-3">
+    <div class="col">
+        <div class="form-group">
+            <label>Adınız <span class="text-danger">*</span></label>
+            <input name="Firstname" value="@Model.User.Firstname" type="text" @(Model.User != null ? "disabled value=" + Model.User.Firstname + "" : "") class="form-control" required placeholder="Adınız">
+        </div>
+    </div>
+    <div class="col">
+        <div class="form-group">
+            <label>Soyadınız <span class="text-danger">*</span></label>
+            <input name="Lastname" value="@Model.User.Lastname" type="text" class="form-control" @(Model.User != null ? "disabled value=" + Model.User.Lastname + "" : "") required placeholder="Soyadınız">
+        </div>
+    </div>
+</div>
+
+<div class="form-row mb-3">
+    <div class="col">
+        <label>Email</label>
+        <input name="Email" type="email" class="form-control" placeholder="Email" value="@Model.User.Email" required readonly>
+    </div>
+                                                    
+    <div class="col">
+        @Html.Label("Telefon", new { @class = "pl-3 control-label" })
+        <span class="text-danger">*</span>
+        <div class="d-flex flex-wrap">
+            @if (Model.User == null)
+            {
+                <div class="col-4 col-md-3 p-0">
+                    <select class="form-control" id="operatorPhone" style="border-right:none;border-bottom-right-radius:0">
+                        <option value="050">050</option>
+                        <option value="051">051</option>
+                        <option value="055">055</option>
+                        <option value="070">070</option>
+                        <option value="077">077</option>
+                        <option value="099">099</option>
+                    </select>
+                </div>
+            }
+
+            <input class="form-control col-md-9 col-8" @(Model.User != null ? "disabled value=" + Model.User.PhoneNumber+ "" : "") type="text" value="" id="phoneInput" required />
+            <input type="hidden" id="phoneNumber" name="PhoneNumber" value="@Model.User.PhoneNumber" />
+        </div>
+    </div>
+</div>
+<div class="shipping-container py-4 p-2 my-2 bg-white">
+    <h4>Çatdırılma ünvanı</h4>
+    <div class="form-group">
+        <input name="DeliveredAddress" type="text" class="form-control" placeholder="Küç., bina, blok, mənzil, mərtəbə" required>
+    </div>
+</div>
+<div class="biling-container my-3">
+    <h4>Ödəniş üsulu</h4>
+    <div class="accordion" id="paymentOptions">
+        <div class="card">
+            <div class="card-header">
+                <h2 class="mb-0">
+                    <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#cashOnDeliveryContainer" aria-expanded="false">
+                        Qapıda ödəmə
+                    </button>
+                    <i class="fas fa-wallet text-info"></i>
+                </h2>
+            </div>
+            <div id="cashOnDeliveryContainer" class="collapse show" data-parent="#paymentOptions" style="">
+                <div class="card-body">
+                    <button type="button" id="submitCashOnDelivery" class="site-btn place-btn btn-lg btn-block">
+                        Sifarişi tamamla
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</form>
+</div>
+
+</div>
+<div class="col-lg-4">
+<div class="place-order">
+<div class="order-total">
+<ul class="order-table">
+    <li>
+        Məhsullar
+    </li>
+
+    @{Html.RenderPartial("_Checkout", Model);}
+    <li class="fw-normal">
+        <span class="">Məhsulların qiyməti sifarişi tamamladıqdan sonra sizə göndəriləcək</span>
+    </li>
+
+</ul>
+<br />
+<div class="my-5 small">
+    <i class="pr-2 fas fa-cart-arrow-down"></i>
+    <a href="~/Orders/Cart" class="text-info mt-3 text-capitalize">Səbətdəki məhsulları buradan dəyişin.</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+                    }
+                    else
+                    {
+                        <div class="alert alert-warning mb-0" role="alert">
+                            Səbətdə məhsul yoxdur
+                        </div>
+                    }
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+
+    <script>
+        $(function () {
+            $("#submitCashOnDelivery").click(function () {
+                if ($("#contactDetailsForm").valid()) {
+                    console.log($("#contactDetailsForm").serialize())   
+                    $(this).addClass("disabled")
+                    $.ajax({
+                        url: "@Url.Action("PlaceOrderCash","Orders")",
+                        data: $("#contactDetailsForm").serialize(),
+                        beforeSend: function () {
+                            $("#loadFormGif").show();
+                        }, complete: function () {
+                            $("#loadFormGif").hide();
+                        }, success: function (result) {
+                               Cookies.set("cartItems", '');
+                            Swal.fire({
+                                position: 'center',
+                                icon: 'success',
+                                title: 'Sifarişiniz uğurla qeydə alındı.',
+                                text:'Email ünvanınıza sifariş məlumatları göndərildi.',
+                                showConfirmButton: false,
+                                timer: 6000
+                            }).then((result) => {
+                                console.log(result)
+                                window.location = '/mehsullar';
+
+                            })
+                        }
+                    })
+                        .fail(function (XMLHttpRequest, textStatus, errorThrown) {
+                            swal.fire("error", "Sifariş zamanı xəta baş verdi.", "warning")
+                        })
+                } else {
+                    swal.fire("error", "Sifariş zamanı xəta baş verdi.", "warning")
+                }
+
+            })
+
+        })
+    </script>
+}

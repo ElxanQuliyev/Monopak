@@ -1,0 +1,92 @@
+﻿@model MonopakApp.ViewModels.FilterProductsViewModel
+@if (Model.Products != null && Model.Products.Count > 0)
+{
+    <div class="row">
+        @foreach (MonopakApp.Models.Product pro in Model.Products)
+        {
+            <div class="col-lg-4 col-sm-6 my-4">
+                <div class="product-item">
+                    <div class="product-img">
+                        <img style="height:200px;object-fit:contain;width:100%" src="@pro.ProductPhoto" class="img-fluid" alt="@pro.Name.Trim()-@pro.ProductCode">
+                    </div>
+                    <hr />
+                    <div class="px-3 py-1">
+                        @Html.Raw(pro.Description)
+                    </div>
+                    <h4 class="px-3 pb-3">@pro.Name</h4>
+
+                    <b>@pro.ProductCode</b>
+                    <div class="my-2 btn-checkout" data-toggle="modal" data-target="#cartModal">
+                        <a pro-quantity="@pro.MinCount" style="cursor:pointer" pro-id="@pro.Id" class="btn w-100 btn-lg btn-success d-flex align-items-center justify-content-center" href="#">
+                            <img style="width:8%;color:#fff;pointer-events:none" src="~/FrontPublic/Uploads/shopping-cart.svg" />
+                            <span style="pointer-events:none" class="ml-2">Səbətə at</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+    <div class="mainPag my-5">
+        @if (Model.Pager != null && Model.Pager.TotalPages > 1)
+        {
+            <div class="col-lg-12">
+                <div class="pageination">
+                    <nav>
+                        <ul class="pagination flex-wrap justify-content-center">
+                            @if (Model.Pager.CurrentPage == 1)
+                            {
+                                <li class="page-item disabled">
+                                    <a class="page-link disabled" href="#" aria-label="Previous">
+                                        <i class="fas fa-angle-left"></i>
+                                    </a>
+                                </li>
+                            }
+                            else
+                            {
+                                <li class="page-item">
+                                    <a class="page-link" href="@Url.Action("ProductList","Product",new { pageNo=Model.Pager.CurrentPage-1,q=Model.SearchTerm})">
+                                        <i class="fas fa-angle-left"></i>
+                                    </a>
+                                </li>
+                            }
+
+                            @for (int page = Model.Pager.StartPage; page < Model.Pager.EndPage + 1; page++)
+                            {
+                                var active = page == Model.Pager.CurrentPage ? "active" : string.Empty;
+
+                                <li class="page-item @active">
+                                    <a class="page-link" href="@Url.Action("ProductList","Product",new { pageNo=page,q=Model.SearchTerm})">
+                                        @page
+                                    </a>
+                                </li>
+                            }
+
+                            @if (Model.Pager.CurrentPage == Model.Pager.EndPage)
+                            {
+                                <li class="page-item disabled">
+                                    <a class="page-link disabled">
+                                        <i class="fas fa-angle-right"></i>
+                                    </a>
+                                </li>
+                            }
+                            else
+                            {
+                                <li class="page-item">
+                                    <a class="page-link" href="@Url.Action("ProductList","Product",new { pageNo=Model.Pager.CurrentPage+1,q=Model.SearchTerm})">
+                                        <i class="fas fa-angle-right"></i>
+                                    </a>
+                                </li>
+                            }
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        }
+    </div>
+
+}
+else
+{
+    <p class="alert alert-warning my-5">Heç bir məhsul tapılmadı</p>
+}

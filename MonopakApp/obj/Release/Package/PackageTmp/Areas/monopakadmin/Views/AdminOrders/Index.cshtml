@@ -1,0 +1,37 @@
+﻿@using MonopakApp.Models
+@model MonopakApp.Areas.monopakadmin.ViewModels.OrdersListingViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/monopakadmin/Views/Shared/_AdminLayout.cshtml";
+}
+@section adminCss{
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.21/datatables.min.css" />
+
+}
+
+<div class="container-fluid">
+    <div class="row mt-2">
+        <div class="col-lg-12 col-md-12">
+            <h2>Sifarişlər</h2>
+            <hr />
+        </div>
+        
+        <div class="col-lg-12">
+            @{Html.RenderPartial("_Listing", Model);}
+        </div>
+    </div>
+
+</div>
+@section adminScripts{
+
+    
+    <script>
+        $(document).ready(function () {
+            $('#orderForm').DataTable({
+                responsive: true
+        });
+            
+        });
+
+    </script>
+}

@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="MonoDB-Web.config Connection String" description="MonoDB Connection String used in web.config by the application to access the database." defaultValue="data source=sql5047.site4now.net;initial catalog=DB_A4F2AC_monopak;user id=DB_A4F2AC_monopak_admin;password=Mono_2020;MultipleActiveResultSets=True;App=EntityFramework" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\Elxan\\Desktop\\\{\{Elxan}}\\Sites\\Monopak\\MonopakApp\\obj\\Debug\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='MonoDB']/@connectionString" />
+  </parameter>
+</parameters>

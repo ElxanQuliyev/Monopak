@@ -1,0 +1,60 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/monopakadmin/Views/Shared/_AdminLayout.cshtml";
+}
+@section adminCss{
+
+    <link href="~/Areas/monopakadmin/Backpublic/assets/css/mapMain.css" rel="stylesheet" />
+}
+<h2>Maps</h2>
+
+@*<input id="pac-input" class="controls form-control" type="text" placeholder="Search...">*@
+<div style="height:500px" id="map"></div>
+<script>
+      // This example adds a search box to a map, using the Google Place Autocomplete
+      // feature. People can enter geographical searches. The search box will return a
+      // pick list containing a mix of places and predicted search terms.
+
+      // This example requires the Places library. Include the libraries=places
+      // parameter when you first load the API. For example:
+      // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
+
+       let locationMap =@Html.Raw(Json.Encode(ViewBag.Settings.Location));
+        
+    console.log(locationMap)
+    let settingsArray = locationMap.split(",");
+    var latMap = Number(settingsArray[0]);
+    var lonMap = Number(settingsArray[1])
+    var uluru = { lat: latMap, lng: lonMap };
+
+
+    function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+            center: uluru,
+            zoom: 16,
+        });
+        var marker = new google.maps.Marker({
+            position: uluru,
+            map: map,
+            draggable: true
+
+        })
+
+        marker.addListener('dragend', function (event) {
+            var value = event.latLng.lat() + "," + event.latLng.lng();
+            var input = document.querySelector("input[name=mapLocation]");
+            input.value = value;
+        })
+    }
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA5Va3wUaBH10-u_uJj3DyuAt5SAQ47haw&callback=initMap"
+        async defer></script>
+<div class="col-md-12">
+    <form method="post">
+        <div class="form-group">
+            <input type="hidden" name="mapLocation" id="mapLocation" />
+            <input class="btn btn-primary pull-right" type="submit" value="Save Changes" />
+        </div>
+    </form>
+</div>

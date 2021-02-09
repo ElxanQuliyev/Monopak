@@ -1,35 +1,41 @@
-﻿namespace MonopakApp.Models
+namespace MonopakApp.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
-    using System.Web.Mvc;
 
     public partial class Product
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Product()
+        {
+            OrderItems = new HashSet<OrderItem>();
+        }
+
         public int Id { get; set; }
 
         [Required]
         [StringLength(300)]
-        [DisplayName("Məhsulun adı")]
         public string Name { get; set; }
 
         [StringLength(800)]
-        [DisplayName("Şəkil")]
-
         public string ProductPhoto { get; set; }
 
         [StringLength(600)]
-        [DisplayName("Məzmun")]
-        [AllowHtml]
-        [DataType(DataType.MultilineText)]
         public string Description { get; set; }
 
-        public int? CategoryId { get; set; }
+        public int CategoryId { get; set; }
+
+        [StringLength(100)]
+        public string ProductCode { get; set; }
+
+        public int? MinCount { get; set; }
 
         public virtual Category Category { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<OrderItem> OrderItems { get; set; }
     }
 }

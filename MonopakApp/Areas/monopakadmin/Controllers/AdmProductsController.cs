@@ -40,7 +40,7 @@ namespace MonopakApp.Areas.monopakadmin.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
-        public async Task<ActionResult> Create([Bind(Include = "Id,Name,ProductPhoto,Description,CategoryId")] Product product,HttpPostedFileBase ProductPhoto)
+        public async Task<ActionResult> Create([Bind(Include = "Id,Name,ProductPhoto,Description,CategoryId,ProductCode,MinCount")] Product product,HttpPostedFileBase ProductPhoto)
         {
             if (ModelState.IsValid)
             {
@@ -84,12 +84,20 @@ namespace MonopakApp.Areas.monopakadmin.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
-        public async Task<ActionResult> Edit([Bind(Include = "Id,Name,ProductPhoto,Description,CategoryId")] Product product,int id,HttpPostedFileBase ProductPhoto)
+        public async Task<ActionResult> Edit([Bind(Include = "Id,Name,ProductPhoto,Description,CategoryId,ProductCode,MinCount")] Product product,int id,HttpPostedFileBase ProductPhoto)
         {
             if (ModelState.IsValid)
             {
                 Product selectedProduct= db.Products.SingleOrDefault(gl => gl.Id == id);
+                if (ProductPhoto != null)
+                {
 
+                    WebImage img = new WebImage(ProductPhoto.InputStream);
+                    FileInfo imgInfo = new FileInfo(ProductPhoto.FileName);
+                    string FileName = Guid.NewGuid().ToString() + imgInfo.Extension;
+                    img.Save("~/FrontPublic/uploads/ProductsImg/" + FileName);
+                    product.ProductPhoto = "/FrontPublic/uploads/ProductsImg/" + FileName;
+                }
                 if (ProductPhoto != null)
                 {
                     if (System.IO.File.Exists(Server.MapPath(selectedProduct.ProductPhoto)))
@@ -105,6 +113,8 @@ namespace MonopakApp.Areas.monopakadmin.Controllers
                 selectedProduct.Name = product.Name;
                 selectedProduct.Description= product.Description;
                 selectedProduct.CategoryId = product.CategoryId;
+                selectedProduct.MinCount= product.MinCount;
+                selectedProduct.ProductCode = product.ProductCode;
 
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");

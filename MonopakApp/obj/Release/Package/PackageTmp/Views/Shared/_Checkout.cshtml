@@ -1,0 +1,19 @@
+﻿@model MonopakApp.ViewModels.CheckoutViewModel
+@if (Model.CartItems != null && Model.CartItems.Count > 0)
+{
+    foreach (var cartItem in Model.CartItems)
+    {
+        var product = Model.CartItems.FirstOrDefault(p => p.Id == cartItem.Id);
+        int? quantity = Model.FinalAmount.FirstOrDefault(pr => pr.productId == cartItem.Id).quantity;
+
+        <li class="fw-normal">
+            <div class="">
+                <h6>@product.Name</h6>
+                @Html.Raw(product.Description.Length > 80 ? product.Description.TrimEnd().Substring(0, product.Description.Length - 20) : product.Description)
+            </div>
+            <i class="ltr-dir" title="Quantity">miqdar x @(quantity!=null?quantity: product.MinCount) </i>
+        </li>
+    }
+}
+
+

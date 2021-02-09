@@ -3,7 +3,6 @@ using MonopakApp.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace MonopakApp.Controllers
@@ -17,22 +16,37 @@ namespace MonopakApp.Controllers
         }
         public ActionResult Index()
         {
+            Random rn = new Random();
+            var productList = new List<Product>();
+            var myProList = _context.Products.ToList();
+            while (productList.Count < 12)
+            {
+                Product u = myProList[rn.Next(myProList.Count)];
+                if (!productList.Contains(u))
+                {
+                    productList.Add(u);
+                }
+            }
             var vm = new HomeVm
             {
+                Settings = _context.Settings.First(),
                 TopSlider = _context.TopSliders.ToList(),
-                about=_context.AboutUs.Find(1),
-                categoryList=_context.Categories.ToList(),
-                ProductList=_context.Products.OrderBy(pr=>pr.Id).Take(10).ToList()
+                about = _context.AboutUs.Find(1),
+                ProductList = productList,
+                CategoryList = _context.Categories.ToList(),
             };
             return View(vm);
         }
         public ActionResult ProList(int? catId)
         {
             if (catId == null) return HttpNotFound();
-            var prList= _context.Products.Where(pr =>  pr.CategoryId == catId).OrderBy(pr => pr.Id).Take(6).ToList();
+            ViewBag.prCount = _context.Products.Where(pr => pr.CategoryId == catId).Count();
+
+            var prList = _context.Products.Where(pr =>  pr.CategoryId == catId).OrderBy(pr => pr.Id).ToList();
+
             var vm = new HomeVm
             {
-                categoryList = _context.Categories.ToList(),
+                Settings = _context.Settings.First(),
                 ProductList = prList
             };
             return PartialView("_ProductPartial", vm);
@@ -40,52 +54,47 @@ namespace MonopakApp.Controllers
 
         public ActionResult ProductList(int? id)
         {
+            ViewBag.prCount = _context.Products.Where(pr => pr.CategoryId == id).Count();
+            
             List<Product> proList = null ;
             if (id != null)
             {
                 ViewBag.ProCatId = Url.RequestContext.RouteData.Values["id"];
-                proList = _context.Products.Where(pr=>pr.CategoryId==id).OrderBy(pr => pr.Id).Take(6).ToList();
+                proList = _context.Products.Where(pr=>pr.CategoryId==id).OrderBy(pr => pr.Id).Take(9).ToList();
             }
             else
                 proList = _context.Products.OrderBy(pr => pr.Id).Take(14).ToList();
 
             var vm = new HomeVm
             {
-                categoryList = _context.Categories.ToList(),
-                ProductList = proList
+                ProductList = proList,
+                Settings = _context.Settings.First()
+
             };
             return View(vm);
         }
         public ActionResult GetMorePro(int? catId,int skip,int take)
         {
+
+            ViewBag.prCount = _context.Products.Where(pr => pr.CategoryId == catId).Count();
+
             var prList = _context.Products.Where(pr => pr.CategoryId == catId).OrderBy(pr => pr.Id).Skip(skip).Take(take).ToList();
 
             var vm = new HomeVm
             {
-                categoryList = _context.Categories.ToList(),
+                Settings = _context.Settings.First(),
                 ProductList = prList
             };
             return PartialView("_ProductPartial", vm);
 
         }
 
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
-            var vm = new HomeVm
-            {
-                categoryList = _context.Categories.ToList(),
-
-                TopSlider = _context.TopSliders.ToList()
-            };
-            return View(vm);
-        }
 
         public ActionResult Contact()
         {
             var vm = new HomeVm
             {
-                categoryList = _context.Categories.ToList(),
+                Settings = _context.Settings.First()
             };
             return View(vm);
         }

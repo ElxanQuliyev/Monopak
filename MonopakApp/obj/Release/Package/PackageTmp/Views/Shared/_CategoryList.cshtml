@@ -1,0 +1,7 @@
+﻿@model MonopakApp.ViewModels.BaseViewModel
+<div class="dropdown-menu dropdown-default main-drop" aria-labelledby="navbarDropdownMenuLink-333">
+    @foreach (var cat in Model.CategoryList)
+    {
+        <a class="dropdown-item" href="@Url.Action("ProductList","Product",new { id=cat.GenerateItemNameAsParam()})">@cat.Name</a>
+    }
+</div>

@@ -1,0 +1,46 @@
+﻿@model MonopakApp.ViewModels.CheckoutViewModel
+
+@if (Model != null && Model.CartItems != null && Model.CartItems.Count > 0)
+{
+    <div class="cart_inner">
+        <div class="table-responsive">
+            <table class="table table-responsive-sm">
+                <tbody>
+                    
+                    @foreach (var product in Model.CartItems)
+                    {
+                    
+                    <tr>
+                        <td width="20%">
+                            <div class=" ">
+                                <img class="img-thumbnail mr-2" src="@product.ProductPhoto" alt="@product.Name" />
+                            </div>
+                        </td>
+                        <td width="50%">
+                            <div class="media d-flex align-items-center">
+                                <div class="media-body">
+                                    <h6>@product.Name - @Html.Raw(product.Description)</h6>
+                                </div>
+                            </div>
+                        </td>
+
+                        <td class="pt-4">
+                            <em style="font-size:.8em">min-sifariş sayı(@product.MinCount)</em>
+                        </td>
+                        <td class="pt-4 prd-remove" pro-id="@product.Id">
+                            <img style="width:25px" src="~/FrontPublic/Uploads/trash (1).svg" alt="Alternate Text" />
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+}
+else
+{
+    <div class="alert alert-warning mb-0" role="alert">
+        Səbətdə məhsul yoxdur.
+    </div>
+}
+

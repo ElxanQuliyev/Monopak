@@ -32,9 +32,6 @@ namespace MonopakApp.Models
         public string Description { get; set; }
 
         [StringLength(250)]
-        public string LocX { get; set; }
-
-        [StringLength(250)]
-        public string LocY { get; set; }
+        public string Location { get; set; }
     }
 }

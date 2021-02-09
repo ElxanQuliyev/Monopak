@@ -1,0 +1,154 @@
+﻿@model MonopakApp.ViewModels.ProductsViewModel
+@using MonopakApp.Helpers
+@using MonopakApp.Models
+@{
+    string categoryName = "";
+    if (Model.CategoryID.HasValue)
+    {
+        categoryName = @Model.Categories.FirstOrDefault(c => c.Id == Model.CategoryID.Value).Name;
+    }
+    ViewBag.Title = categoryName;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+<input type="hidden" id="prdId" value="@ViewBag.ProCatId" />
+<input type="hidden" id="prCount" value="@ViewBag.prCount" />
+<section id="head-overlay" class="text-center py-1 py-md-5">
+    <h1 class="hdmain text-center my-5"><a class="text-white text-decoration-none" href="/mehsullar">Məhsullar</a> </h1>
+    <ul class="list-unstyled d-flex justify-content-center">
+        <li class=""><a class="text-white" href="/"><i class="fas fa-home mr-1"></i> Əsas Səhifə</a> </li>
+        <li class="mx-2"> - </li>
+        <li><a class="text-white" href="/mehsullar">Məhsullar</a> </li>
+        <li class="mx-2"> - </li>
+        <li>@categoryName</li>
+    </ul>
+</section>
+<section id="Products" style="color:#333;background:#6ea174;">
+    <div class="container-fluid">
+        <div style="display:none" class="productLoad col-4 mx-auto">
+            <img class="img-fluid" src="~/FrontPublic/Uploads/prload.gif" />
+        </div>
+        <div class="row mnProduct">
+            <div class="col-lg-3 ">
+                <div class="pro-left">
+                    <h4 class="cat-down d-flex justify-content-between align-items-center pt-3">Kateqoriyalar <span class="pt-2 px-3 w-100 d-sm-none"><i class="fas fa-chevron-down"></i></span></h4>
+                    <div class="cat-down-item">
+                        <ul class="navCat list-unstyled p-0 pt-3">
+                            <li class="nav-item py-2">
+                                <a class="nav-link @(Model.CategoryID==null?"cat-active":string.Empty)" href="/mehsullar">Bütün məhsullar</a>
+                            </li>
+                            @foreach (var item in Model.Categories)
+                            {
+                                <li class="nav-item py-2" cat-id="@item.Id">
+                                    <a class="nav-link @(Model.CategoryID.HasValue && Model.CategoryID.Value==item.Id ? "cat-active":string.Empty)" href="@Url.Action("ProductList","Product",new { id=item.GenerateItemNameAsParam()})">@item.Name</a>
+                                </li>
+                            }
+
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-9">
+                <div id="rightProList" style="">
+                    <div class="top-pro bg-light p-2 my-1">
+                        <div class="d-flex justify-content-between flex-wrap mt-4 ">
+                            <div class="info-pro px-2">
+                                <h3>Məhsullar</h3>
+                                <p><em style="font-size:.8em">Bütün məhsulları ad və ya məhsul kodu ilə daha rahat tapın</em> </p>
+                            </div>
+                            <div class="col-lg-5 p-2">
+                                <form action="" method="post" novalidate id="searchPro">
+                                    <div class="input-group">
+                                        <input id="search-input" type="text" class="form-control" value="@Model.SearchTerm" name="searchTerm" placeholder="Məhsul axtarış...">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-secondary btn-search" type="button">
+                                                <i class="fa fa-search"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <h5 class="float-left p-2">@categoryName</h5>
+                        <p class="float-right px-3 pt-1">
+                            Göstərilir:
+                            @(((Model.Pager.CurrentPage-1)*Model.Pager.PageSize)+1) -
+                            @(((Model.Pager.CurrentPage-1)*Model.Pager.PageSize)+(Model.Products.Count<Model.Pager.PageSize ? Model.Products.Count:Model.Pager.PageSize)) |
+                            @Model.Pager.TotalItems Məhsul tapıldı
+                        </p>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div id="loadFormGif">
+                        <img width="200" src="~/FrontPublic/Uploads/_______.gif" alt="Alternate Text" />
+                    </div>
+                    <div id="searchedProducts">
+
+                        @{
+                            var filterProduct = new MonopakApp.ViewModels.FilterProductsViewModel();
+                            filterProduct.Products = Model.Products;
+                            filterProduct.Pager = Model.Pager;
+                            Html.RenderPartial("FilterProductList", filterProduct);
+                        }
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+
+    </div>
+</section>
+
+
+@section scripts{
+    <script>
+        $(function () {
+            $(".cat-down span").click(function () {
+                $(".cat-down-item .navCat").slideToggle();
+            })
+
+            const searchInput = $("#search-input");
+            let searchval = "";
+            searchInput.on("keyup", delay(SearchedProduct, 500));
+            $(".btn-search").click(delay(SearchedProduct, 500))
+
+            function SearchedProduct() {
+                searchval = $(this).val();
+                if (searchval != "" && searchval.length >= 2) {
+                    searchval = searchval.toLowerCase();
+                    $.ajax({
+                        url: '@Url.Action("FilterProductList", "Product")',
+                        data: {
+                            q: searchval
+                        },
+                        beforeSend: function () {
+                            debugger;
+                            $("#loadFormGif").show();
+                        },
+                        complete: function () {
+                            debugger;
+                            $("#loadFormGif").hide();
+                        },
+                        success: function (res) {
+                            $("#searchedProducts").html(res)
+
+                        }
+                    })
+                }
+            }
+                function delay(callback, ms) {
+                    var timer = 0;
+                    return function () {
+                        var context = this, args = arguments;
+                        clearTimeout(timer);
+                        timer = setTimeout(function () {
+                            callback.apply(context, args);
+                        }, ms || 0);
+                    };
+                }
+
+            });
+    </script>
+}

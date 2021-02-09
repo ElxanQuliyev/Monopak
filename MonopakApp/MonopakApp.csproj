@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
-  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -48,12 +48,52 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.3\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.3\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Owin, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.2.3\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=3.6.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Owin, Version=4.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.4.1.0\lib\net45\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb, Version=4.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.4.1.0\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security, Version=4.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.4.1.0\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Cookies, Version=4.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.Cookies.4.1.0\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Google, Version=4.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.Google.4.1.0\lib\net45\Microsoft.Owin.Security.Google.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.OAuth, Version=4.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.OAuth.4.1.0\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -109,9 +149,6 @@
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.11.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="WebGrease">
       <Private>True</Private>
       <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
@@ -122,34 +159,73 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform">
-      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Areas\monopakadmin\Controllers\AdmAboutUsController.cs" />
     <Compile Include="Areas\monopakadmin\Controllers\AdmCategoriesController.cs" />
     <Compile Include="Areas\monopakadmin\Controllers\AdminAccountController.cs" />
+    <Compile Include="Areas\monopakadmin\Controllers\AdminOrdersController.cs" />
     <Compile Include="Areas\monopakadmin\Controllers\AdmProductsController.cs" />
+    <Compile Include="Areas\monopakadmin\Controllers\AdmSettingsController.cs" />
     <Compile Include="Areas\monopakadmin\Controllers\AdmTopSlidersController.cs" />
     <Compile Include="Areas\monopakadmin\Controllers\AuthenticationFilter.cs" />
     <Compile Include="Areas\monopakadmin\Controllers\HomeController.cs" />
+    <Compile Include="Areas\monopakadmin\Controllers\MapsController.cs" />
     <Compile Include="Areas\monopakadmin\monopakadminAreaRegistration.cs" />
+    <Compile Include="Areas\monopakadmin\ViewModels\AdminHomeVm.cs" />
+    <Compile Include="Areas\monopakadmin\ViewModels\OrderDetailsViewModel.cs" />
+    <Compile Include="Areas\monopakadmin\ViewModels\OrdersListingViewModel.cs" />
+    <Compile Include="Areas\monopakadmin\ViewModels\Pager.cs" />
+    <Compile Include="Areas\monopakadmin\ViewModels\PageViewModel.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\ProductController.cs" />
+    <Compile Include="Controllers\OrdersController.cs" />
+    <Compile Include="Controllers\WidgetsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\ConfigurationsHelper.cs" />
+    <Compile Include="Helpers\GetSeoFriendlyRoute.cs" />
+    <Compile Include="Helpers\HtmlHelpers.cs" />
+    <Compile Include="Helpers\PageSizeEnums.cs" />
+    <Compile Include="Helpers\URLHelpers.cs" />
     <Compile Include="Models\AboutU.cs" />
+    <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\AspNetRole.cs" />
+    <Compile Include="Models\AspNetUser.cs" />
+    <Compile Include="Models\AspNetUserClaim.cs" />
+    <Compile Include="Models\AspNetUserLogin.cs" />
     <Compile Include="Models\Category.cs" />
+    <Compile Include="Models\Configuration.cs" />
+    <Compile Include="Models\ConfigurationType.cs" />
+    <Compile Include="Models\eCommerceDBInitializer.cs" />
+    <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\MonoDB.cs" />
+    <Compile Include="Models\Order.cs" />
+    <Compile Include="Models\OrderHistory.cs" />
+    <Compile Include="Models\OrderItem.cs" />
+    <Compile Include="Models\OrderStatus.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\Setting.cs" />
+    <Compile Include="Models\sysdiagram.cs" />
     <Compile Include="Models\TopSlider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\ConfigurationsService.cs" />
+    <Compile Include="Services\OrdersService.cs" />
+    <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\CartViewModel.cs" />
+    <Compile Include="ViewModels\CartProductsViewModel.cs" />
+    <Compile Include="ViewModels\CreateUserVM.cs" />
     <Compile Include="ViewModels\HomeVm.cs" />
+    <Compile Include="ViewModels\Pager.cs" />
+    <Compile Include="ViewModels\ProductCartModel.cs" />
+    <Compile Include="ViewModels\ProductsViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\monopakadmin\Backpublic\assets\css\app.min.css" />
@@ -162,6 +238,7 @@
     <Content Include="Areas\monopakadmin\Backpublic\assets\css\images\ui-icons_cc0000_256x240.html" />
     <Content Include="Areas\monopakadmin\Backpublic\assets\css\images\ui-icons_ffffff_256x240.html" />
     <Content Include="Areas\monopakadmin\Backpublic\assets\css\jquery-ui.min.css" />
+    <Content Include="Areas\monopakadmin\Backpublic\assets\css\mapMain.css" />
     <Content Include="Areas\monopakadmin\Backpublic\assets\css\metisMenu.min.css" />
     <Content Include="Areas\monopakadmin\Backpublic\assets\images\1.png" />
     <Content Include="Areas\monopakadmin\Backpublic\assets\images\close.png" />
@@ -201,24 +278,60 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
-    <Content Include="FrontPublic\css\style.css" />
+    <Content Include="FrontPublic\css\style5.min.css" />
     <Content Include="FrontPublic\fonts\fontawesome\css\all.min.css" />
     <Content Include="FrontPublic\fonts\fontawesome\webfonts\fa-brands-400.svg" />
     <Content Include="FrontPublic\fonts\fontawesome\webfonts\fa-regular-400.svg" />
     <Content Include="FrontPublic\fonts\fontawesome\webfonts\fa-solid-900.svg" />
     <Content Include="FrontPublic\js\app.js" />
-    <Content Include="FrontPublic\js\slider.js" />
+    <Content Include="FrontPublic\js\cart3.js" />
+    <Content Include="FrontPublic\js\CustomValidate.js" />
+    <Content Include="FrontPublic\js\slider2.js" />
+    <Content Include="FrontPublic\orders.png" />
+    <Content Include="FrontPublic\Uploads\add-to-basket.svg" />
+    <Content Include="FrontPublic\Uploads\add-to-cart.svg" />
+    <Content Include="FrontPublic\Uploads\basket.svg" />
+    <Content Include="FrontPublic\Uploads\buy.svg" />
+    <Content Include="FrontPublic\Uploads\cart.svg" />
+    <Content Include="FrontPublic\Uploads\contact-img.jpg" />
+    <Content Include="FrontPublic\Uploads\monopak_logo %282%29.ico" />
+    <Content Include="FrontPublic\Uploads\monopak_logo.ico" />
+    <Content Include="FrontPublic\Uploads\overl.jpg" />
     <Content Include="FrontPublic\Uploads\prload.gif" />
-    <Content Include="FrontPublic\Uploads\AboutImg\about1.jpg" />
     <Content Include="FrontPublic\Uploads\CategoryImg\108031-0.jpg" />
     <Content Include="FrontPublic\Uploads\CategoryImg\IMG_0381.jpg" />
     <Content Include="FrontPublic\Uploads\CategoryImg\IMG_0437.jpg" />
     <Content Include="FrontPublic\Uploads\CategoryImg\IMG_0444.jpg" />
     <Content Include="FrontPublic\Uploads\CategoryImg\IMG_0779.jpg" />
     <Content Include="FrontPublic\Uploads\monopak_logo.png" />
-    <Content Include="FrontPublic\vendors\bootstrap\css\bootstrap.min.css" />
-    <Content Include="FrontPublic\vendors\bootstrap\js\bootstrap.min.js" />
-    <Content Include="FrontPublic\vendors\jquery\jquery-3.4.1.min.js" />
+    <Content Include="FrontPublic\Uploads\retail.svg" />
+    <Content Include="FrontPublic\Uploads\shopping-basket.svg" />
+    <Content Include="FrontPublic\Uploads\shopping-cart %281%29.svg" />
+    <Content Include="FrontPublic\Uploads\shopping-cart.svg" />
+    <Content Include="FrontPublic\Uploads\site-logo.png" />
+    <Content Include="FrontPublic\Uploads\SliderImg\146-1465294_customization-printing-on-plastic.png" />
+    <Content Include="FrontPublic\Uploads\SliderImg\417-4172714_aluminum-foil-png-aluminum-foil-food-png-transparent.png" />
+    <Content Include="FrontPublic\Uploads\SliderImg\585ac0cd4f6ae202fedf293e.png" />
+    <Content Include="FrontPublic\Uploads\SliderImg\96680554_244292843587363_1930352212005879808_o.jpg" />
+    <Content Include="FrontPublic\Uploads\SliderImg\auto lock bottom boxes.png" />
+    <Content Include="FrontPublic\Uploads\SliderImg\Caja Bandua 20x14x5 cm.png" />
+    <Content Include="FrontPublic\Uploads\SliderImg\coffe2.png" />
+    <Content Include="FrontPublic\Uploads\SliderImg\Cold Shoulder.jpg" />
+    <Content Include="FrontPublic\Uploads\SliderImg\gloves1.png" />
+    <Content Include="FrontPublic\Uploads\SliderImg\gloves2.png" />
+    <Content Include="FrontPublic\Uploads\SliderImg\PngItem_4172714.png" />
+    <Content Include="FrontPublic\Uploads\SliderImg\shdeffect.png" />
+    <Content Include="FrontPublic\Uploads\SliderImg\sld-blue.jpg" />
+    <Content Include="FrontPublic\Uploads\SliderImg\sld111.jpg" />
+    <Content Include="FrontPublic\Uploads\SliderImg\sld2.jpg" />
+    <Content Include="FrontPublic\Uploads\SliderImg\sld3.jpg" />
+    <Content Include="FrontPublic\Uploads\SliderImg\sld4.jpg" />
+    <Content Include="FrontPublic\Uploads\SliderImg\sld5.jpg" />
+    <Content Include="FrontPublic\Uploads\SliderImg\sld6.png" />
+    <Content Include="FrontPublic\Uploads\SliderImg\smoke1.png" />
+    <Content Include="FrontPublic\Uploads\supermarket.svg" />
+    <Content Include="FrontPublic\Uploads\trash %281%29.svg" />
+    <Content Include="FrontPublic\Uploads\_______.gif" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="FrontPublic\fonts\fontawesome\webfonts\fa-brands-400.eot" />
@@ -233,29 +346,6 @@
     <Content Include="FrontPublic\fonts\fontawesome\webfonts\fa-solid-900.ttf" />
     <Content Include="FrontPublic\fonts\fontawesome\webfonts\fa-solid-900.woff" />
     <Content Include="FrontPublic\fonts\fontawesome\webfonts\fa-solid-900.woff2" />
-    <Content Include="Scripts\bootstrap.bundle.js" />
-    <Content Include="Scripts\bootstrap.bundle.min.js" />
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Scripts\bootstrap.min.js.map" />
-    <Content Include="Scripts\bootstrap.js.map" />
-    <Content Include="Scripts\bootstrap.bundle.min.js.map" />
-    <Content Include="Scripts\bootstrap.bundle.js.map" />
-    <Content Include="Content\bootstrap.min.css.map" />
-    <Content Include="Content\bootstrap.css.map" />
-    <Content Include="Content\bootstrap-reboot.min.css.map" />
-    <Content Include="Content\bootstrap-reboot.css.map" />
-    <Content Include="Content\bootstrap-grid.min.css.map" />
-    <Content Include="Content\bootstrap-grid.css.map" />
-    <Content Include="Scripts\esm\popper-utils.js" />
-    <Content Include="Scripts\esm\popper-utils.min.js" />
-    <Content Include="Scripts\esm\popper.js" />
-    <Content Include="Scripts\esm\popper.min.js" />
-    <Content Include="Scripts\index.js.flow" />
-    <Content Include="Scripts\esm\popper.min.js.map" />
-    <Content Include="Scripts\esm\popper.js.map" />
-    <Content Include="Scripts\esm\popper-utils.min.js.map" />
-    <Content Include="Scripts\esm\popper-utils.js.map" />
     <Content Include="Areas\monopakadmin\Views\web.config" />
     <Content Include="Areas\monopakadmin\Views\Shared\_AdminLayout.cshtml" />
     <Content Include="Areas\monopakadmin\Views\Home\Index.cshtml" />
@@ -278,8 +368,6 @@
     <Content Include="Areas\monopakadmin\Views\AdmAboutUs\Edit.cshtml" />
     <Content Include="Areas\monopakadmin\Views\AdmAboutUs\Index.cshtml" />
     <Content Include="Areas\monopakadmin\Views\AdmCategories\Create.cshtml" />
-    <Content Include="Areas\monopakadmin\Views\AdmCategories\Delete.cshtml" />
-    <Content Include="Areas\monopakadmin\Views\AdmCategories\Details.cshtml" />
     <Content Include="Areas\monopakadmin\Views\AdmCategories\Edit.cshtml" />
     <Content Include="Areas\monopakadmin\Views\AdmCategories\Index.cshtml" />
     <Content Include="Areas\monopakadmin\Views\AdmProducts\Create.cshtml" />
@@ -288,86 +376,39 @@
     <Content Include="Areas\monopakadmin\Views\AdmProducts\Edit.cshtml" />
     <Content Include="Areas\monopakadmin\Views\AdmProducts\Index.cshtml" />
     <Content Include="Areas\monopakadmin\Views\AdminAccount\Login.cshtml" />
-    <None Include="Scripts\jquery-3.4.1.intellisense.js" />
-    <Content Include="Scripts\jquery-3.4.1.js" />
-    <Content Include="Scripts\jquery-3.4.1.min.js" />
-    <Content Include="Scripts\jquery-3.4.1.slim.js" />
-    <Content Include="Scripts\jquery-3.4.1.slim.min.js" />
-    <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
-    <Content Include="Scripts\jquery-3.4.1.min.map" />
-    <None Include="Scripts\jquery.validate-vsdoc.js" />
-    <Content Include="Scripts\jquery.validate.js" />
-    <Content Include="Scripts\jquery.validate.min.js" />
-    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
-    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Areas\monopakadmin\Views\AdmSettings\Edit.cshtml" />
+    <Content Include="Areas\monopakadmin\Views\AdmSettings\Index.cshtml" />
+    <Content Include="Areas\monopakadmin\Views\Maps\Index.cshtml" />
+    <Content Include="FrontPublic\fonts\Aldo.ttf" />
+    <Content Include="FrontPublic\fonts\ArialNU.otf" />
+    <Content Include="Areas\monopakadmin\Views\AdminOrders\Index.cshtml" />
+    <Content Include="Areas\monopakadmin\Views\AdminOrders\_Listing.cshtml" />
+    <Content Include="Areas\monopakadmin\Views\AdminOrders\Details.cshtml" />
+    <Content Include="Areas\monopakadmin\Views\AdminOrders\_Details.cshtml" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-reboot.min.css.map" />
+    <Content Include="Content\bootstrap-reboot.css.map" />
+    <Content Include="Content\bootstrap-grid.min.css.map" />
+    <Content Include="Content\bootstrap-grid.css.map" />
+    <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
+    <Content Include="Scripts\bootstrap.bundle.js" />
+    <Content Include="Scripts\bootstrap.bundle.min.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\bootstrap.min.js.map" />
+    <Content Include="Scripts\bootstrap.js.map" />
+    <Content Include="Scripts\bootstrap.bundle.min.js.map" />
+    <Content Include="Scripts\bootstrap.bundle.js.map" />
+    <None Include="Properties\PublishProfiles\Default Settings.pubxml" />
+    <None Include="Scripts\jquery-3.5.1.intellisense.js" />
+    <Content Include="Scripts\jquery-3.5.1.js" />
+    <Content Include="Scripts\jquery-3.5.1.min.js" />
+    <Content Include="Scripts\jquery-3.5.1.slim.js" />
+    <Content Include="Scripts\jquery-3.5.1.slim.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
-    <Content Include="Scripts\popper-utils.js" />
-    <Content Include="Scripts\popper-utils.min.js" />
-    <Content Include="Scripts\popper.js" />
-    <Content Include="Scripts\popper.min.js" />
-    <Content Include="Scripts\src\index.js" />
-    <Content Include="Scripts\src\methods\defaults.js" />
-    <Content Include="Scripts\src\methods\destroy.js" />
-    <Content Include="Scripts\src\methods\disableEventListeners.js" />
-    <Content Include="Scripts\src\methods\enableEventListeners.js" />
-    <Content Include="Scripts\src\methods\placements.js" />
-    <Content Include="Scripts\src\methods\update.js" />
-    <Content Include="Scripts\src\modifiers\applyStyle.js" />
-    <Content Include="Scripts\src\modifiers\arrow.js" />
-    <Content Include="Scripts\src\modifiers\computeStyle.js" />
-    <Content Include="Scripts\src\modifiers\flip.js" />
-    <Content Include="Scripts\src\modifiers\hide.js" />
-    <Content Include="Scripts\src\modifiers\index.js" />
-    <Content Include="Scripts\src\modifiers\inner.js" />
-    <Content Include="Scripts\src\modifiers\keepTogether.js" />
-    <Content Include="Scripts\src\modifiers\offset.js" />
-    <Content Include="Scripts\src\modifiers\preventOverflow.js" />
-    <Content Include="Scripts\src\modifiers\shift.js" />
-    <Content Include="Scripts\src\utils\clockwise.js" />
-    <Content Include="Scripts\src\utils\computeAutoPlacement.js" />
-    <Content Include="Scripts\src\utils\debounce.js" />
-    <Content Include="Scripts\src\utils\find.js" />
-    <Content Include="Scripts\src\utils\findCommonOffsetParent.js" />
-    <Content Include="Scripts\src\utils\findIndex.js" />
-    <Content Include="Scripts\src\utils\getBordersSize.js" />
-    <Content Include="Scripts\src\utils\getBoundaries.js" />
-    <Content Include="Scripts\src\utils\getBoundingClientRect.js" />
-    <Content Include="Scripts\src\utils\getClientRect.js" />
-    <Content Include="Scripts\src\utils\getFixedPositionOffsetParent.js" />
-    <Content Include="Scripts\src\utils\getOffsetParent.js" />
-    <Content Include="Scripts\src\utils\getOffsetRect.js" />
-    <Content Include="Scripts\src\utils\getOffsetRectRelativeToArbitraryNode.js" />
-    <Content Include="Scripts\src\utils\getOppositePlacement.js" />
-    <Content Include="Scripts\src\utils\getOppositeVariation.js" />
-    <Content Include="Scripts\src\utils\getOuterSizes.js" />
-    <Content Include="Scripts\src\utils\getParentNode.js" />
-    <Content Include="Scripts\src\utils\getPopperOffsets.js" />
-    <Content Include="Scripts\src\utils\getReferenceNode.js" />
-    <Content Include="Scripts\src\utils\getReferenceOffsets.js" />
-    <Content Include="Scripts\src\utils\getRoot.js" />
-    <Content Include="Scripts\src\utils\getRoundedOffsets.js" />
-    <Content Include="Scripts\src\utils\getScroll.js" />
-    <Content Include="Scripts\src\utils\getScrollParent.js" />
-    <Content Include="Scripts\src\utils\getStyleComputedProperty.js" />
-    <Content Include="Scripts\src\utils\getSupportedPropertyName.js" />
-    <Content Include="Scripts\src\utils\getViewportOffsetRectRelativeToArtbitraryNode.js" />
-    <Content Include="Scripts\src\utils\getWindow.js" />
-    <Content Include="Scripts\src\utils\getWindowSizes.js" />
-    <Content Include="Scripts\src\utils\includeScroll.js" />
-    <Content Include="Scripts\src\utils\index.js" />
-    <Content Include="Scripts\src\utils\isBrowser.js" />
-    <Content Include="Scripts\src\utils\isFixed.js" />
-    <Content Include="Scripts\src\utils\isFunction.js" />
-    <Content Include="Scripts\src\utils\isIE.js" />
-    <Content Include="Scripts\src\utils\isModifierEnabled.js" />
-    <Content Include="Scripts\src\utils\isModifierRequired.js" />
-    <Content Include="Scripts\src\utils\isNumeric.js" />
-    <Content Include="Scripts\src\utils\isOffsetContainer.js" />
-    <Content Include="Scripts\src\utils\removeEventListeners.js" />
-    <Content Include="Scripts\src\utils\runModifiers.js" />
-    <Content Include="Scripts\src\utils\setAttributes.js" />
-    <Content Include="Scripts\src\utils\setStyles.js" />
-    <Content Include="Scripts\src\utils\setupEventListeners.js" />
+    <Content Include="Scripts\tinymce\icons\default\icons.js" />
+    <Content Include="Scripts\tinymce\icons\default\icons.min.js" />
     <Content Include="Scripts\tinymce\jquery.tinymce.min.js" />
     <Content Include="Scripts\tinymce\license.txt" />
     <Content Include="Scripts\tinymce\plugins\advlist\plugin.js" />
@@ -494,10 +535,7 @@
     <Content Include="Scripts\tinymce\themes\silver\theme.min.js" />
     <Content Include="Scripts\tinymce\tinymce.js" />
     <Content Include="Scripts\tinymce\tinymce.min.js" />
-    <Content Include="Scripts\umd\popper-utils.js" />
-    <Content Include="Scripts\umd\popper-utils.min.js" />
-    <Content Include="Scripts\umd\popper.js" />
-    <Content Include="Scripts\umd\popper.min.js" />
+    <Content Include="sitemap.xml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -509,32 +547,49 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Scripts\umd\popper.min.js.map" />
-    <Content Include="Scripts\umd\popper.js.map" />
-    <Content Include="Scripts\umd\popper.js.flow" />
-    <Content Include="Scripts\umd\popper-utils.min.js.map" />
-    <Content Include="Scripts\umd\popper-utils.js.map" />
-    <Content Include="Scripts\README.md" />
-    <Content Include="Scripts\popper.min.js.map" />
-    <Content Include="Scripts\popper.js.map" />
-    <Content Include="Scripts\popper-utils.min.js.map" />
-    <Content Include="Scripts\popper-utils.js.map" />
-    <Content Include="Views\Home\ProductList.cshtml" />
+    <Content Include="Views\Shared\_ProductPartial.cshtml" />
+    <Content Include="Views\Product\ProductList.cshtml" />
+    <Content Include="Views\Orders\_CartProducts.cshtml" />
+    <Content Include="Views\Orders\Checkout.cshtml" />
+    <Content Include="Views\Shared\_Checkout.cshtml" />
+    <Content Include="Views\Shared\_CategoryList.cshtml" />
+    <Content Include="Views\Manage\AddPhoneNumber.cshtml" />
+    <Content Include="Views\Manage\ChangePassword.cshtml" />
+    <Content Include="Views\Manage\Index.cshtml" />
+    <Content Include="Views\Manage\ManageLogins.cshtml" />
+    <Content Include="Views\Manage\SetPassword.cshtml" />
+    <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Account\ConfirmEmail.cshtml" />
+    <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
+    <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
+    <Content Include="Views\Account\ForgotPassword.cshtml" />
+    <Content Include="Views\Account\ForgotPasswordConfirmation.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Account\ResetPassword.cshtml" />
+    <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
+    <Content Include="Views\Account\SendCode.cshtml" />
+    <Content Include="Views\Account\VerifyCode.cshtml" />
+    <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
+    <Content Include="Views\Orders\Cart.cshtml" />
+    <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Scripts\jquery-3.5.1.slim.min.map" />
+    <Content Include="Scripts\jquery-3.5.1.min.map" />
     <Content Include="Scripts\tinymce\skins\ui\oxide\fonts\tinymce-mobile.woff" />
     <Content Include="Scripts\tinymce\skins\ui\oxide-dark\fonts\tinymce-mobile.woff" />
     <Content Include="Scripts\tinymce\langs\readme.md" />
-    <Content Include="Views\Shared\_ProductPartial.cshtml" />
+    <Content Include="Views\Product\FilterProductList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\monopakadmin\Models\" />
     <Folder Include="Areas\monopakadmin\Views\AuthenticationFilter\" />
     <Folder Include="Areas\monopakadmin\Views\TopSlider\" />
+    <Folder Include="FrontPublic\Uploads\AboutImg\" />
     <Folder Include="FrontPublic\Uploads\ProductsImg\" />
-    <Folder Include="FrontPublic\Uploads\SliderImg\" />
+    <Folder Include="Views\Widgets\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -543,7 +598,8 @@
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
-    <TypeScriptCompile Include="Scripts\index.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\createjs-lib\createjs-lib.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\preloadjs\preloadjs.d.ts" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -578,8 +634,12 @@
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.targets'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets'))" />
   </Target>
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

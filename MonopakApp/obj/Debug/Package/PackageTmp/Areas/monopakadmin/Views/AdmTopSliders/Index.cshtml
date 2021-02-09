@@ -1,0 +1,51 @@
+﻿@model IEnumerable<MonopakApp.Models.TopSlider>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/monopakadmin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Yeni", "Create", "", new { @class = "btn btn-success btn-lg" })
+
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.SliderPhoto)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Price)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+<tr>
+    <td width="25%">
+        <img src="@item.SliderPhoto" class="img-thumbnail" alt="Alternate Text" />
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Description)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Price)
+    </td>
+    <td>
+        <a class="btn btn-warning" href="@Url.Action("Edit","AdmTopSliders",new { id=item.Id})">
+            <i class="far fa-edit"></i>
+        </a>&nbsp;&nbsp;&nbsp;
+        <a class="btn btn-danger" href="@Url.Action("Delete","AdmTopSliders",new { id=item.Id})">
+            <i class="far fa-trash-alt"></i>
+        </a>
+
+    </td>
+</tr>
+}
+
+</table>

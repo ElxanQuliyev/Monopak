@@ -10,7 +10,12 @@ namespace MonopakApp.ViewModels
     {
         public IEnumerable<TopSlider> TopSlider{ get; set; }
         public AboutU about { get; set; }
-        public IEnumerable<Category> categoryList { get; set; }
+        public Setting Settings{ get; set; }
+        public List<Category> CategoryList { get; set; }
         public IEnumerable<Product>ProductList{ get; set; }
+        public Pager Pager { get; set; }
+        public int PageNo { get; set; }
+        public int? PageSize { get; set; }
+
     }
 }

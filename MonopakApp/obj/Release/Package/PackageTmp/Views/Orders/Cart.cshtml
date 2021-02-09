@@ -1,0 +1,53 @@
+﻿@model MonopakApp.ViewModels.CheckoutViewModel
+@{
+    ViewBag.Title = "Cart";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="cartPreview" style="margin:7em 0;min-height:60vh">
+    <div class="container">
+
+        <h2 class="my-2">Səbət</h2>
+        @if (Model != null && Model.CartItems != null && Model.CartItems.Count > 0)
+        {
+            var i = 1;
+            <table class="table w-100 table-responsive-sm table-striped">
+                <thead>
+                    <tr>
+                        <td>#</td>
+                        <td>Şəkil</td>
+                        <td>Məhsul</td>
+                        <td>Miqdar</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var cartPro in Model.CartItems)
+                    {
+                        int? quantity=Model.FinalAmount.FirstOrDefault(pr=>pr.productId==cartPro.Id).quantity;
+                        <tr>
+                            <td>@i</td>
+                            <td>
+                                <img style="width:100px" class="img-thumbnail" src="@cartPro.ProductPhoto" alt="Alternate Text" />
+                            </td>
+                            <td>@cartPro.Name - @Html.Raw(cartPro.Description)</td>
+                            <td>
+                                <input data-id="@cartPro.Id" style="width:100px !important" type="number" name="changeQuantity" class="form-control changeQuantity" value="@(quantity!=null? quantity:cartPro.MinCount)" min="@cartPro.MinCount" />
+                            </td>
+                        </tr>
+                        i++;
+                    }
+                </tbody>
+            </table>
+            <div class="col-12 d-flex justify-content-end">
+                <a class="btn btn-success btn-lg" href="@Url.Action("Checkout","Orders")">Sifarişi rəsmiləşdir</a>
+            </div>
+        }
+        else
+        {
+            <div class="alert alert-warning mb-0" role="alert">
+                Səbətdə məhsul yoxdur
+            </div>
+        }
+    </div>
+</div>
+
